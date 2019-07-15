@@ -37,6 +37,7 @@ class Xnat15DicomProjectIdentifier extends DbBackedProjectIdentifier {
     protected List<DicomDerivedString> getIdentifiers() {
         final List<DicomDerivedString> identifiers = Lists.newArrayList();
         identifiers.add(new ContainedAssignmentDicomIdentifier(Tag.PatientComments, "Project", Pattern.CASE_INSENSITIVE));
+        identifiers.add(new PatternDicomIdentifier(Tag.StudyDescription,Pattern.compile("(\\d+[-_]\\d+[A-Z]?-?\\d+)"),MATCHED_GROUP));
         identifiers.add(new ContainedAssignmentDicomIdentifier(Tag.StudyComments, "Project", Pattern.CASE_INSENSITIVE));
         identifiers.add(new TextDicomIdentifier(Tag.StudyDescription));
         identifiers.add(new TextDicomIdentifier(Tag.AccessionNumber));
@@ -45,6 +46,7 @@ class Xnat15DicomProjectIdentifier extends DbBackedProjectIdentifier {
     }
 
     private static final String DICOM_PROJECT_RULES = "dicom-project.rules";
+    private static final int MATCHED_GROUP = 1;
 
     private static final Logger _log = LoggerFactory.getLogger(Xnat15DicomProjectIdentifier.class);
 

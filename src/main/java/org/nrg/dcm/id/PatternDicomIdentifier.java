@@ -54,7 +54,11 @@ public final class PatternDicomIdentifier implements DicomDerivedString {
             if (m.matches()) {
                 logger.trace("input {} matched rule {}", v, this);
                 return m.group(group);
-            } else {
+            } else if(m.find()) {
+                logger.trace("input {} matched rule {}", v, this);
+                return m.group(1);
+            } 
+            else {
                 logger.trace("input {} did not match rule {}", v, this);
                 return null;
             }

@@ -27,11 +27,14 @@ public class ClassicDicomObjectIdentifier extends CompositeDicomObjectIdentifier
                                                                                                               .build();
     private static final ImmutableList<Extractor> sessionExtractors   = new ImmutableList.Builder<Extractor>().add(new ContainedAssignmentExtractor(Tag.PatientComments, "Session", Pattern.CASE_INSENSITIVE))
                                                                                                               .add(new ContainedAssignmentExtractor(Tag.StudyComments, "Session", Pattern.CASE_INSENSITIVE))
+                                                                                                              .add(new TextExtractor(Tag.AccessionNumber))
+                                                                                                              .add(new TextExtractor(Tag.StudyDate))
                                                                                                               .add(new TextExtractor(Tag.PatientID))
                                                                                                               .build();
     private static final ImmutableList<Extractor> subjectExtractors   = new ImmutableList.Builder<Extractor>().add(new ContainedAssignmentExtractor(Tag.PatientComments, "Subject", Pattern.CASE_INSENSITIVE))
                                                                                                               .add(new ContainedAssignmentExtractor(Tag.StudyComments, "Subject", Pattern.CASE_INSENSITIVE))
                                                                                                               .add(new TextExtractor(Tag.PatientName))
+                                                                                                              .add(new TextExtractor(Tag.PatientID))
                                                                                                               .build();
 
     public ClassicDicomObjectIdentifier(final String name, final XnatUserProvider userProvider, final UserProjectCache userProjectCache) {
